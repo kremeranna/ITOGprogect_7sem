@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RedShop - Интернет-магазин электроники</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <i class="fas fa-fire"></i>
+                    <span>RedShop</span>
+                </a>
+                <div class="header-controls">
+                    <button class="theme-toggle" id="theme-toggle" title="Сменить тему">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <div class="cart-icon" id="cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cart-count">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Filters Section -->
+        <section class="filters-section">
+            <h3 class="filters-title">Фильтры товаров</h3>
+            <div class="filters-grid">
+                <button class="filter-btn active" data-filter="all">Все товары</button>
+                <button class="filter-btn" data-filter="laptop">Ноутбуки</button>
+                <button class="filter-btn" data-filter="phone">Смартфоны</button>
+                <button class="filter-btn" data-filter="tablet">Планшеты</button>
+                <button class="filter-btn" data-filter="accessory">Аксессуары</button>
+            </div>
+        </section>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Products Section -->
+            <section class="products-section">
+                <h2 class="section-title">Популярные товары</h2>
+                <div class="products-grid" id="products-grid">
+                    <!-- Products will be inserted here by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Cart Sidebar -->
+            <aside class="cart-sidebar">
+                <h2 class="section-title">Корзина</h2>
+                
+                <div class="cart-items" id="cart-items">
+                    <!-- Cart items will be inserted here by JavaScript -->
+                </div>
+                
+                <div class="cart-summary">
+                    <div class="summary-row">
+                        <span>Товары:</span>
+                        <span id="subtotal">0 ₽</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Скидка:</span>
+                        <span id="discount">0 ₽</span>
+                    </div>
+                    <div class="summary-row summary-total">
+                        <span>Итого:</span>
+                        <span id="total">0 ₽</span>
+                    </div>
+                </div>
+                
+                <div class="promo-section">
+                    <div class="promo-header">
+                        <h4>Промокод</h4>
+                        <button class="remove-promo" id="remove-promo">Удалить промокод</button>
+                    </div>
+                    <div class="promo-input">
+                        <input type="text" id="promo-code" placeholder="Введите промокод">
+                        <button class="promo-btn" id="apply-promo">Применить</button>
+                    </div>
+                    <div class="promo-message" id="promo-message"></div>
+                </div>
+                
+                <button class="checkout-btn" id="checkout-btn">Оформить заказ</button>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Product Detail Modal -->
+    <div class="modal" id="product-detail-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Детали товара</h2>
+                <button class="close-modal" id="close-detail-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="product-detail" id="product-detail-content">
+                    <!-- Product detail will be inserted here by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal" id="payment-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Оформление заказа</h2>
+                <button class="close-modal" id="close-payment-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="payment-form">
+                    <div class="payment-methods">
+                        <h3>Выберите способ оплаты</h3>
+                        <div class="payment-method" data-method="card1">
+                            <div class="payment-method-icon">
+                                <i class="fab fa-cc-visa"></i>
+                            </div>
+                            <div class="payment-method-info">
+                                <h4>Visa •••• 1234</h4>
+                                <p>Основная карта</p>
+                            </div>
+                        </div>
+                        <div class="payment-method" data-method="card2">
+                            <div class="payment-method-icon">
+                                <i class="fab fa-cc-mastercard"></i>
+                            </div>
+                            <div class="payment-method-info">
+                                <h4>Mastercard •••• 5678</h4>
+                                <p>Дополнительная карта</p>
+                            </div>
+                        </div>
+                        <div class="payment-method" data-method="card3">
+                            <div class="payment-method-icon">
+                                <i class="fab fa-cc-mir"></i>
+                            </div>
+                            <div class="payment-method-info">
+                                <h4>Мир •••• 9012</h4>
+                                <p>Зарплатная карта</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-summary">
+                        <h3>Детали заказа</h3>
+                        <div class="summary-row">
+                            <span>Товары:</span>
+                            <span id="payment-subtotal">0 ₽</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Скидка:</span>
+                            <span id="payment-discount">0 ₽</span>
+                        </div>
+                        <div class="summary-row summary-total">
+                            <span>К оплате:</span>
+                            <span id="payment-total">0 ₽</span>
+                        </div>
+                    </div>
+                    
+                    <button class="checkout-btn" id="confirm-payment">Оплатить</button>
+                </div>
+                
+                <div id="payment-success" style="display: none;">
+                    <div class="success-message">
+                        <div class="success-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h2>Оплата прошла успешно!</h2>
+                        <p>Ваш заказ №<span id="order-number">15487</span> оформлен и будет доставлен в течение 3-5 рабочих дней.</p>
+                        <button class="continue-shopping" id="continue-shopping">Продолжить покупки</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>RedShop</h3>
+                    <p>Современный интернет-магазин электроники с лучшими ценами и быстрой доставкой. Мы работаем для вас!</p>
+                </div>
+                
+                <!-- Заменяем блок "Категории" на "Мои проекты" -->
+                <div class="footer-section">
+                    <h3>Мои проекты</h3>
+                    <ul class="footer-links">
+                        <li>
+                            <a href="https://kremeranna.github.io/WEBportfolio_7sem/" target="_blank" rel="noopener">
+                                <i class="fas fa-briefcase" style="margin-right: 8px; color: var(--primary-color);"></i>
+                                Сайт-портфолио
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://kremeranna.github.io/pogoga_7sem/" target="_blank" rel="noopener">
+                                <i class="fas fa-cloud-sun" style="margin-right: 8px; color: var(--primary-color);"></i>
+                                Погодный дашборд
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://kremeranna.github.io/WEBgame_7sem/" target="_blank" rel="noopener">
+                                <i class="fas fa-gamepad" style="margin-right: 8px; color: var(--primary-color);"></i>
+                                Игра платформер
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Поддержка</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Доставка и оплата</a></li>
+                        <li><a href="#">Гарантия</a></li>
+                        <li><a href="#">Возврат товара</a></li>
+                        <li><a href="#">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-phone"></i> 8 (800) 123-45-67</li>
+                        <li><i class="fas fa-envelope"></i> info@redshop.ru</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Москва, ул. Электронная, 15</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 RedShop. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
